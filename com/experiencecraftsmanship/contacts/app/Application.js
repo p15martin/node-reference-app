@@ -25,7 +25,7 @@ define(
                 console.log( "Starting application..." );
 
                 async.parallel([
-                    function( callback ) { connectToDatabase( "blah", callback ) },
+                    function( callback ) { connectToDatabase( mongoUri, callback ) },
                     function( callback ) { startRpcServer( rpcServerPort, callback ) }
                 ],
                 function( error, results ) {
