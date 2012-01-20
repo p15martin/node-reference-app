@@ -1,12 +1,12 @@
-This is a reference application for Node.js that is intended to demonstrate project structure and separation of concerns.
+This is a reference application for Node.js that is intended to demonstrate code coverage and clean code that shows code by intent, separation of concerns, modularity, but to name a few.
 
-It was built again Heroku and MongoDB (MongoLabs) and uses the following Node.js modules:
+It makes use of the following packages:
 
 * RequireJS
 * Connect
 * Connect-JSONRPC
 * Mongoose
-* Promised-IO
+* Async
 
 
 The service API simply allows CRUD operations against the database. You can call them using cURL as follows (remember to substitute the application URL with your application URL):
