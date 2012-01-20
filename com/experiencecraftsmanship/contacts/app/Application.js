@@ -15,24 +15,23 @@ define(
 
             this.name = this.constructor.name;
             this.message = message;
-
         }
 
         ApplicationError.prototype.__proto__ = Error.prototype;
         
         return {
-            start: function( mongoUri, rpcServerPort, callback ) {
+            start: function( mongoUri, rpcServerPort ) {
                 console.log( "Starting application..." );
 
                 async.parallel([
                     function( callback ) { connectToDatabase( mongoUri, callback ) },
                     function( callback ) { startRpcServer( rpcServerPort, callback ) }
                 ],
-                function( error, results ) {
+                function( error ) {
                     if ( error ) {
                         throw new ApplicationError( "Error starting application!" );
                     } else {
-                        console.log( "Started application successfully" );
+                        console.log( "Application started successfully" );
                     }
                 });
             }
