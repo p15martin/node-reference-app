@@ -8,7 +8,15 @@ define(
             	connect.createServer(
             		connect.responseTime(),
             		require('connect-jsonrpc')( contactService )
-        		).listen( rpcServerPort, callback );
+        		).listen( rpcServerPort, function( error ) {
+                    if ( error ) {
+                        console.log( "Error starting RPC server on port: " + rpcServerPort );
+                    } else {
+                        console.log( "Successfully started RPC server on port: " + rpcServerPort );
+                    }
+
+                    callback( error );
+                });
             }
         }
     }

@@ -24,14 +24,14 @@ define(
                 console.log( "Starting application..." );
 
                 async.parallel([
-                    function( callback ) { connectToDatabase( "blah", callback ) },
+                    function( callback ) { connectToDatabase( mongoUri, callback ) },
                     function( callback ) { startRpcServer( rpcServerPort, callback ) }
                 ],
                 function( error ) {
                     if ( error ) {
                         throw new ApplicationError( "Error starting application!" );
                     } else {
-                        console.log( "Application started successfully" );
+                        console.log( "Successfully started application!" );
                     }
                 });
             }
