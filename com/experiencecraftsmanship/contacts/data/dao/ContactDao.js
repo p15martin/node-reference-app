@@ -40,6 +40,8 @@ define(
                     } else {
                         console.log( "Successfully found all contacts with lastName '%s'", lastName );
 
+                        console.log( "************ RESULT " + result );
+
                         if ( callback ) {
                             callback( null, result );
                         }
