@@ -9,7 +9,15 @@ define(
                 contact.firstName = firstName;
                 contact.lastName = lastName;
                 contact.cellNumber = cellNumber;
-                contact.save( callback );
+                contact.save( function( error, result ) {
+                    if ( error ) {
+                        console.warn( "Error creating new contact in the database (firstName='%s', 'lastName='%s', cellNumber='%d'): %s", firstName, lastName, cellNumber, error.message );
+                    } else {
+                        console.log( "************New record: " + result );
+                    }
+
+                    callback( error ); // TODO test with no callback
+                });
             },
             findAllContactsByLastName: function( lastName, callback ) {
                 console.log( "Finding all contacts in the database with lastName '%s'", lastName );
