@@ -57,12 +57,10 @@ define(
                             callback( error );
                         }
                     } else {
-                        console.log( "Successfully updated cell number '%s' for contact with id '%s'", cellNumber, id );
-
-                        console.log( "**************** RESULT " + result );
+                        console.log( "Successfully updated '%d' contacts with cell number '%s' and id '%s'", result, cellNumber );
 
                         if ( callback ) {
-                            callback( null, result );
+                            callback( null, { count: result } );
                         }
                     }
                 });

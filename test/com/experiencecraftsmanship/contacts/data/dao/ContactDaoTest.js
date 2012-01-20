@@ -120,11 +120,11 @@ requirejs(
                 this.error = new Error();
             },
             "returns successfully": function() {
-                var ModelMock = this.mock( ContactModel ).expects( "update" ).once().yields( "{}" );
+                var ModelMock = this.mock( ContactModel ).expects( "update" ).once().yields( 1 );
 
                 contactDao.updateCellNumber( this.id, this.cellNumber, this.callback );
 
-                assert.calledOnce( this.callback );
+                assert.calledOnceWith( this.callback, null, { count: 1 } );
                 assert( ModelMock.verify() );
             },
             "without a callback": function() {
