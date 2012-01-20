@@ -31,7 +31,7 @@ define(
                     if ( error ) {
                         throw new ApplicationError( "Error starting application!" );
                     } else {
-                        console.log( "Successfully started application!" );
+                        console.info( "Successfully started application!" );
                     }
                 });
             }

@@ -3,13 +3,13 @@ define(
     function( mongoose ) {
         return {
             connectToDatabase: function( mongoUri, callback ) {
-                console.log( "Connecting to database: " + mongoUri );
+                console.log( "Connecting to database: %s...", mongoUri );
 
                 mongoose.connect( mongoUri, function( error ) {
                 	if ( error ) {
-                		console.log( "Error connecting to database: " + mongoUri );
+                		console.error( "Error connecting to database: %s", mongoUri );
                 	} else {
-                		console.log( "Successfully connected to database: " + mongoUri );
+                		console.info( "Successfully connected to database: %s", mongoUri );
                 	}
 
                 	callback( error );
