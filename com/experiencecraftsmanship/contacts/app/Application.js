@@ -8,7 +8,7 @@ define(
         function startRpcServer( rpcServerPort, callback ) {
             rpcServer.startServer( rpcServerPort, callback );
         }
-        /*
+        
         function ApplicationError( message ) {
             Error.call( this );
             Error.captureStackTrace( this, this.constructor );
@@ -19,16 +19,21 @@ define(
         }
 
         ApplicationError.prototype.__proto__ = Error.prototype;
-        */
+        
         return {
-            start: function( mongoUri, rpcServerPort ) {
+            start: function( mongoUri, rpcServerPort, callback ) {
+                console.log( "Starting application..." );
 
                 async.parallel([
-                        function( callback ) { connectToDatabase( "blah", callback ) },
-                        function( callback ) { startRpcServer( rpcServerPort, callback ) }
-                    ], function( error, results ) {
-                        console.log( "***************** ERROR: " + error );
-                        console.log( "***************** RESULTS: " + results );
+                    function( callback ) { connectToDatabase( "blah", callback ) },
+                    function( callback ) { startRpcServer( rpcServerPort, callback ) }
+                ],
+                function( error, results ) {
+                    if ( error ) {
+                        throw new ApplicationError( "Error starting application!" );
+                    } else {
+                        console.log( "Started application successfully" );
+                    }
                 });
             }
         }
