@@ -12,12 +12,12 @@ define(
                 contact.save( callback );
             },
             findAllContactsByLastName: function( lastName, callback ) {
-                console.log( "Finding all contacts in the database with lastName: %s", lastName );
+                console.log( "Finding all contacts in the database with lastName '%s'", lastName );
 
                 ContactModel.find( { "lastName": lastName }, callback );
             },
             updateCellNumber: function( id, cellNumber, callback ) {
-                console.log( "Updating contact with id '%s' with new cell number: %s", id, cellNumber );
+                console.log( "Updating contact with id '%s' with new cell number '%s'", id, cellNumber );
 
                 ContactModel.update( { "_id": id }, { 'cellNumber': cellNumber }, callback );
             },
