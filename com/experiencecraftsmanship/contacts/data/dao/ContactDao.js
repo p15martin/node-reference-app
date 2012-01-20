@@ -13,7 +13,7 @@ define(
                     if ( error ) {
                         console.warn( "Error creating new contact in the database (firstName='%s', 'lastName='%s', cellNumber='%d'): %s", firstName, lastName, cellNumber, error.message );
                     } else {
-                        console.log( "************New record: " + result );
+                        console.warn( "Successfully created new contact in the database (firstName='%s', 'lastName='%s', cellNumber='%d') with id '%s'", firstName, lastName, cellNumber, result._id );
                     }
 
                     callback( error ); // TODO test with no callback
