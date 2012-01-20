@@ -57,7 +57,7 @@ define(
                             callback( error );
                         }
                     } else {
-                        console.log( "Successfully updated '%d' contacts with cell number '%s' and id '%s'", result, cellNumber );
+                        console.log( "Successfully updated '%d' contact(s) with cell number '%s' and id '%s'", result, cellNumber, id );
 
                         if ( callback ) {
                             callback( null, { count: result } );
@@ -68,7 +68,21 @@ define(
             deleteContact: function( id, callback ) {
                 console.log( "Deleting contact with id '%s'", id );
 
-                ContactModel.remove( { "_id": id }, callback );
+                ContactModel.remove( { "_id": id }, function( error, result ) {
+                    if ( error ) {
+                        console.error( "Error deleting contact with id '%s'", id );
+
+                        if ( callback ) {
+                            callback( error );
+                        }
+                    } else {
+                        console.log( "Successfully deleted '%d' contact(s) with id '%s'", result, id );
+
+                        if ( callback ) {
+                            callback( null, { count: result } );
+                        }
+                    }
+                });
             }
         }
     }
