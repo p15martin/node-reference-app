@@ -22,7 +22,7 @@ define(
                         console.log( "Successfully created the new contact (firstName='%s', 'lastName='%s', cellNumber='%d') in the databasewith id '%s'", firstName, lastName, cellNumber, id );
 
                         if ( callback ) {
-                            callback( null, id );
+                            callback( null, { _id: id } );
                         }
                     }
                 });
@@ -38,9 +38,7 @@ define(
                             callback( error );
                         }
                     } else {
-                        console.log( "Successfully found all contacts with lastName '%s'", lastName );
-
-                        console.log( "************ RESULT " + result.length );
+                        console.log( "Successfully found '%d' contacts with lastName '%s'", result.length, lastName );
 
                         if ( callback ) {
                             callback( null, result );
@@ -49,9 +47,25 @@ define(
                 });
             },
             updateCellNumber: function( id, cellNumber, callback ) {
-                console.log( "Updating contact with id '%s' with new cell number '%s'", id, cellNumber );
+                console.log( "Updating cell number '%s' for contact with id '%s'", cellNumber, id );
 
-                ContactModel.update( { "_id": id }, { 'cellNumber': cellNumber }, callback );
+                ContactModel.update( { "_id": id }, { 'cellNumber': cellNumber }, function( error, result ) {
+                    if ( error ) {
+                        console.error( "Error updating cell number '%s' for contact with id '%s'", cellNumber, id );
+
+                        if ( callback ) {
+                            callback( error );
+                        }
+                    } else {
+                        console.log( "Successfully updated cell number '%s' for contact with id '%s'", cellNumber, id );
+
+                        console.log( "**************** RESULT " + result );
+
+                        if ( callback ) {
+                            callback( null, result );
+                        }
+                    }
+                });
             },
             deleteContact: function( id, callback ) {
                 console.log( "Deleting contact with id '%s'", id );
