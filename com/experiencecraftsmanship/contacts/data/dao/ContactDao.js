@@ -3,7 +3,7 @@ define(
     function( ContactModel ) {
         return {
             addContact: function( firstName, lastName, cellNumber, callback ) {
-                console.log( "Creating a new contact in the databse: firstName='%s', 'lastName='%s', cellNumber='%d'", firstName, lastName, cellNumber );
+                console.log( "Creating a new contact: firstName='%s', 'lastName='%s', cellNumber='%d'", firstName, lastName, cellNumber );
 
                 var contact = ContactModel.newInstance();
                 contact.firstName = firstName;
@@ -11,18 +11,40 @@ define(
                 contact.cellNumber = cellNumber;
                 contact.save( function( error, result ) {
                     if ( error ) {
-                        console.warn( "Error creating new contact in the database (firstName='%s', 'lastName='%s', cellNumber='%d'): %s", firstName, lastName, cellNumber, error.message );
-                    } else {
-                        console.warn( "Successfully created new contact in the database (firstName='%s', 'lastName='%s', cellNumber='%d') with id '%s'", firstName, lastName, cellNumber, result._id );
-                    }
+                        console.error( "Error creating the new contact (firstName='%s', 'lastName='%s', cellNumber='%d') in the database: %s", firstName, lastName, cellNumber, error.message );
 
-                    callback( error ); // TODO test with no callback
+                        if ( callback ) {
+                            callback( error );
+                        }
+                    } else {
+                        var id = result._id;
+
+                        console.log( "Successfully created the new contact (firstName='%s', 'lastName='%s', cellNumber='%d') in the databasewith id '%s'", firstName, lastName, cellNumber, id );
+
+                        if ( callback ) {
+                            callback( null, id );
+                        }
+                    }
                 });
             },
             findAllContactsByLastName: function( lastName, callback ) {
-                console.log( "Finding all contacts in the database with lastName '%s'", lastName );
+                console.log( "Finding all contacts with lastName '%s'", lastName );
 
-                ContactModel.find( { "lastName": lastName }, callback );
+                ContactModel.find( { "lastName": lastName }, function ( error, result ) {
+                    if ( error ) {
+                        console.error( "Error finding all contacts with lastName '%s'", lastName );
+
+                        if ( callback ) {
+                            callback( error );
+                        }
+                    } else {
+                        console.log( "Successfully found all contacts with lastName '%s'", lastName );
+
+                        if ( callback ) {
+                            callback( null, result );
+                        }
+                    }
+                });
             },
             updateCellNumber: function( id, cellNumber, callback ) {
                 console.log( "Updating contact with id '%s' with new cell number '%s'", id, cellNumber );
