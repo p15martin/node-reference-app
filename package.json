@@ -1,0 +1,10 @@
+{
+  "name": "AddressBook",
+  "version": "1.0.0",
+  "dependencies": {
+    "requirejs": "1.0.x",
+    "connect": "1.8.x",
+    "connect-jsonrpc": "0.0.x",
+    "mongoose": "2.4.x"
+  }
+}
