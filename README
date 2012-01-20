@@ -22,3 +22,14 @@ curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "find
 curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "updateCellNumber", "params": ["4f08f1aa4bcd790100000001", 111222333], "id":2 }' -i  http://deep-fire-3746.herokuapp.com
 
 curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "deleteContact", "params": ["4f08f1aa4bcd790100000001"], "id":2 }' -i http://deep-fire-3746.herokuapp.com
+
+
+Deploy to Heroku
+
+heroku create --stack cedar
+
+git remote add heroku git@heroku.com:cold-stone-7259.git
+
+heroku addons:add mongolab:starter
+
+git push heroku master
