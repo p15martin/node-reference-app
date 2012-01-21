@@ -28,36 +28,85 @@ Running the tests
 -----------------
 Like the professional programmers we are, lets start with the tests. I choose [Buster](http://busterjs.org/) for my test framework and [Sinon.JS](http://sinonjs.org/) for my [test spies](http://xunitpatterns.com/Test%20Spy.html), [stubs](http://xunitpatterns.com/Test%20Stub.html), and [mocks](http://xunitpatterns.com/Mock%20Object.html).
 
-First off clone the code from GitHub and make sure you are at the command prompt in the directory that has the code.
+First off clone the code from GitHub.
+
+Next, make sure you are at the command prompt and are in the directory that contains the code for the reference app.
 
 Install the package dependencies:
 
 	npm install
 
+Install [Buster](http://busterjs.org/):
 
+	sudo npm install –g buster 
 
+(if you have problems installing Buster please refer to this [page](http://busterjs.org/docs/getting-started/))
 
-The service API simply allows CRUD operations against the database. You can call them using cURL as follows (remember to substitute the application URL with your application URL):
+Run the tests:
 
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["Peter", "Martin", 123678924], "id":2 }' -i http://deep-fire-3746.herokuapp.com
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["Joe", "Bloggs", 789678068], "id":2 }' -i http://deep-fire-3746.herokuapp.com
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["Fred", "Bloggs", 789461207], "id":2 }' -i http://deep-fire-3746.herokuapp.com
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["John", "Doe", 123563846], "id":2 }' -i http://deep-fire-3746.herokuapp.com
+	buster test
 
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "findAllContactsByLastName", "params": ["Martin"], "id":2 }' -i http://deep-fire-3746.herokuapp.com
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "findAllContactsByLastName", "params": ["Bloggs"], "id":2 }' -i http://deep-fire-3746.herokuapp.com
-
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "updateCellNumber", "params": ["4f08f1aa4bcd790100000001", 111222333], "id":2 }' -i  http://deep-fire-3746.herokuapp.com
-
-curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "deleteContact", "params": ["4f08f1aa4bcd790100000001"], "id":2 }' -i http://deep-fire-3746.herokuapp.com
+Easy! The convenience of the Buster test runner makes it ideal for integration with a CI server such as [Jenkins](http://jenkins-ci.org/). It also has a headless test runner, which is ideal for your client-side tests.
 
 
 Deploy to Heroku
+----------------
+I developed the reference app against [Heroku](http://www.heroku.com/). For my [MongoDB](http://www.mongodb.org/) database I used the Heroku [add-on](http://addons.heroku.com/) for [MongoLab](https://mongolab.com/home).
 
-heroku create --stack cedar
+If you don't already have an account on [Heroku](http://www.heroku.com/) then create one and [install](http://devcenter.heroku.com/articles/heroku-command) the command line client (CLI).
 
-git remote add heroku git@heroku.com:cold-stone-7259.git
+Again, make sure you are at the commond prompt, from the directory that contains the code for the reference app.
 
-heroku addons:add mongolab:starter
+Create an app on Heroku using the [Cedar stack](http://devcenter.heroku.com/articles/cedar):
 
-git push heroku master
+	heroku create --stack cedar
+
+When your app has been created you should see the app name e.g. cold-stone-7259.
+
+Add your Heroku app as a remote repository (remember to use your app name):
+
+	git remote add heroku git@heroku.com:cold-stone-7259.git
+
+Add the [MongoLab add-on](http://addons.heroku.com/mongolab):
+
+	heroku addons:add mongolab:starter
+
+Deploy the app (using a git push):
+
+	git push heroku master
+
+If you tail the logs you should see that the app has started:
+
+	heroku logs -s app --tail
+
+
+Use the app
+-----------
+
+We will continue to work at the command prompt. If you want open a second terminal window, again from the directory that contains code for the reference app, tail the logs so you can see what is going on.
+
+I am using [cURL](http://curl.haxx.se/) to hit the RPC services. As before, remember to use your app name in the URL.
+
+Add a contact:
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["Peter", "Martin", 123678924], "id":2 }' -i http://cold-stone-7259.herokuapp.com
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["Joe", "Bloggs", 789678068], "id":2 }' -i http://cold-stone-7259.herokuapp.com
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["Fred", "Bloggs", 789461207], "id":2 }' -i http://cold-stone-7259.herokuapp.com
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "addContact", "params": ["John", "Doe", 123563846], "id":2 }' -i http://cold-stone-7259.herokuapp.com
+
+Find all contacts by last name:
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "findAllContactsByLastName", "params": ["Martin"], "id":2 }' -i http://cold-stone-7259.herokuapp.com
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "findAllContactsByLastName", "params": ["Bloggs"], "id":2 }' -i http://cold-stone-7259.herokuapp.com
+
+Update the cell number for a contact:
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "updateCellNumber", "params": ["4f1a0dc1458dbb0100000001", 111222333], "id":2 }' -i  http://cold-stone-7259.herokuapp.com
+
+Delete a contact:
+
+	curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "deleteContact", "params": ["4f1a0dc1458dbb0100000001"], "id":2 }' -i http://cold-stone-7259.herokuapp.com
