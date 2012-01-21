@@ -1,12 +1,12 @@
-This is a reference application for Node.js that is intended to demonstrate project structure and separation of concerns.
+This is a reference application for Node.js that is intended to demonstrate code coverage and clean code that shows code by intent, separation of concerns, modularity, but to name a few.
 
-It was built again Heroku and MongoDB (MongoLabs) and uses the following Node.js modules:
+It makes use of the following packages:
 
 * RequireJS
 * Connect
 * Connect-JSONRPC
 * Mongoose
-* Promised-IO
+* Async
 
 
 The service API simply allows CRUD operations against the database. You can call them using cURL as follows (remember to substitute the application URL with your application URL):
@@ -22,3 +22,14 @@ curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "find
 curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "updateCellNumber", "params": ["4f08f1aa4bcd790100000001", 111222333], "id":2 }' -i  http://deep-fire-3746.herokuapp.com
 
 curl -H "Content-Type: application/json" -d '{ "jsonrpc": "2.0", "method": "deleteContact", "params": ["4f08f1aa4bcd790100000001"], "id":2 }' -i http://deep-fire-3746.herokuapp.com
+
+
+Deploy to Heroku
+
+heroku create --stack cedar
+
+git remote add heroku git@heroku.com:cold-stone-7259.git
+
+heroku addons:add mongolab:starter
+
+git push heroku master
