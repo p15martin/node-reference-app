@@ -1,4 +1,15 @@
-This is a reference application for Node.js that is intended to demonstrate code coverage and clean code that shows code by intent, separation of concerns, modularity, but to name a few.
+# Introduction
+
+This is a reference application for Node.js. It is intended to demonstrate the following principles:
+
+* test coverage
+* clean code
+* separation of concerns
+* modularity
+* error handling
+* logging
+* timing
+* log correlation
 
 It makes use of the following packages:
 
