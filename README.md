@@ -1,8 +1,6 @@
 Introduction
 ============
-
 This is a reference application for [Node.js](http://nodejs.org/). It is intended to demonstrate the following principles:
-
 * test coverage
 * clean code
 * separation of concerns
@@ -12,8 +10,7 @@ This is a reference application for [Node.js](http://nodejs.org/). It is intende
 * timing
 * log correlation
 
-It makes use of the following packages:
-
+The reference app makes use of the following packages:
 * [RequireJS](http://requirejs.org/) - used for modularity of the codebase and to manage dependencies
 * [Connect](https://github.com/senchalabs/connect) - provides a middleware framework 
 * [Connect-JSONRPC](https://github.com/visionmedia/connect-jsonrpc) - provides [JSON-RPC 2.0](http://jsonrpc.org/spec.html) support via the Connect middleware framework
@@ -24,18 +21,17 @@ It makes use of the following packages:
 
 The app
 -------
-
 The app is intended to be simple. It exposes a basic set of [CRUD](http://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations as JSON-RPC services. My database of choice is [MongoDB](http://www.mongodb.org/).
 
 
 Running the tests
 -----------------
-
 Like the professional programmers we are, lets start with the tests. I choose [Buster](http://busterjs.org/) for my test framework and [Sinon.JS](http://sinonjs.org/) for my [test spies](http://xunitpatterns.com/Test%20Spy.html), [stubs](http://xunitpatterns.com/Test%20Stub.html), and [mocks](http://xunitpatterns.com/Mock%20Object.html).
 
 First off clone the code from GitHub and make sure you are at the command prompt in the directory that has the code.
 
 Install the package dependencies:
+
 	npm install
 
 
