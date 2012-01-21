@@ -16,7 +16,7 @@ The reference app makes use of the following packages:
 * [RequireJS](http://requirejs.org/) - used for modularity of the codebase and to manage dependencies
 * [Connect](https://github.com/senchalabs/connect) - provides a middleware framework 
 * [Connect-JSONRPC](https://github.com/visionmedia/connect-jsonrpc) - provides [JSON-RPC 2.0](http://jsonrpc.org/spec.html) support via the Connect middleware framework
-* [Mongoose](http://mongoosejs.com/) - object modelling tool for [MongoDB](http://www.mongodb.org/)
+* [Mongoose](http://mongoosejs.com/) - object modeling tool for [MongoDB](http://www.mongodb.org/)
 * [Async](https://github.com/caolan/async) - asynchronous flow control (e.g. performing tasks in sequence or parallel) 
 * [node-uuid](https://github.com/broofa/node-uuid) - generation of RFC4122 UUIDS, which is used to generate a unique logid for correlating related activities
 
@@ -28,7 +28,7 @@ The app is intended to be simple. It exposes a basic set of [CRUD](http://en.wik
 
 Running the tests
 -----------------
-Like the professional programmers we are, lets start with the tests. I choose [Buster](http://busterjs.org/) for my test framework and [Sinon.JS](http://sinonjs.org/) for my [test spies](http://xunitpatterns.com/Test%20Spy.html), [stubs](http://xunitpatterns.com/Test%20Stub.html), and [mocks](http://xunitpatterns.com/Mock%20Object.html).
+Like the professional programmers we are, we will start with the tests. I choose [Buster](http://busterjs.org/) for my test framework and [Sinon.JS](http://sinonjs.org/) for my [test spies](http://xunitpatterns.com/Test%20Spy.html), [stubs](http://xunitpatterns.com/Test%20Stub.html), and [mocks](http://xunitpatterns.com/Mock%20Object.html). [Sinon.JS](http://sinonjs.org/) is embedded within [Buster](http://busterjs.org/), which is super nice and makes it super easy to write robust tests.
 
 First off clone the code from GitHub.
 
@@ -42,13 +42,13 @@ Install [Buster](http://busterjs.org/):
 
 	sudo npm install –g buster 
 
-(if you have problems installing Buster please refer to this [page](http://busterjs.org/docs/getting-started/))
+(if you have problems installing Buster then please refer to this [page](http://busterjs.org/docs/getting-started/))
 
 Run the tests:
 
 	buster test
 
-Easy! The convenience of the Buster test runner makes it ideal for integration with a CI server such as [Jenkins](http://jenkins-ci.org/). It also has a headless test runner, which is ideal for your client-side tests.
+Easy! The convenience of the Buster test runner makes it ideal for integration with a CI server such as [Jenkins](http://jenkins-ci.org/). It also has a headless test runner, which is perfect for your client-side tests.
 
 
 Deploy to Heroku
@@ -57,7 +57,7 @@ I developed the reference app against [Heroku](http://www.heroku.com/). For my [
 
 If you don't already have an account on [Heroku](http://www.heroku.com/) then create one and [install](http://devcenter.heroku.com/articles/heroku-command) the command line client (CLI).
 
-Again, make sure you are at the commond prompt, from the directory that contains the code for the reference app.
+Again, make sure you are at the commond prompt, and are in the directory that contains the code for the reference app.
 
 Create an app on Heroku using the [Cedar stack](http://devcenter.heroku.com/articles/cedar):
 
@@ -77,15 +77,17 @@ Deploy the app (using a git push):
 
 	git push heroku master
 
-If you tail the logs you should see that the app has started:
+If you look at Heroku logs you should see that the app has started:
 
-	heroku logs -s app --tail
+	heroku logs -s app
 
 
 Use the app
 -----------
 
-We will continue to work at the command prompt. If you want open a second terminal window, again from the directory that contains code for the reference app, tail the logs so you can see what is going on.
+We will continue to work at the command prompt. If you want open a second terminal window, again from the directory that contains code for the reference app, tail the logs so you can see what is going on:
+
+	heroku logs -s app --tail
 
 I am using [cURL](http://curl.haxx.se/) to hit the RPC services. As before, remember to use your app name in the URL.
 
