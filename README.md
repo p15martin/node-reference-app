@@ -1,6 +1,7 @@
 Introduction
 ============
 This is a reference application for [Node.js](http://nodejs.org/). It is intended to demonstrate the following principles:
+
 * test coverage
 * clean code
 * separation of concerns
@@ -11,6 +12,7 @@ This is a reference application for [Node.js](http://nodejs.org/). It is intende
 * log correlation
 
 The reference app makes use of the following packages:
+
 * [RequireJS](http://requirejs.org/) - used for modularity of the codebase and to manage dependencies
 * [Connect](https://github.com/senchalabs/connect) - provides a middleware framework 
 * [Connect-JSONRPC](https://github.com/visionmedia/connect-jsonrpc) - provides [JSON-RPC 2.0](http://jsonrpc.org/spec.html) support via the Connect middleware framework
