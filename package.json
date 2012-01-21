@@ -6,6 +6,7 @@
     "connect": "1.8.x",
     "connect-jsonrpc": "0.0.x",
     "mongoose": "2.4.x",
-    "async": "x.x.x"
+    "async": "x.x.x",
+    "node-uuid": "1.3.x"
   }
 }
