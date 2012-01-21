@@ -3,7 +3,7 @@ define(
     function( ContactModel ) {
         return {
             addContact: function( firstName, lastName, cellNumber, callback ) {
-                console.log( "Creating a new contact in the database: firstName='%s', 'lastName='%s', cellNumber='%d'", firstName, lastName, cellNumber );
+                console.log( "Creating a new contact in the database for firstName='%s', 'lastName='%s', cellNumber='%d'", firstName, lastName, cellNumber );
 
                 var contact = ContactModel.newInstance();
                 contact.firstName = firstName;
@@ -22,7 +22,7 @@ define(
                         console.log( "Successfully created the new contact (firstName='%s', 'lastName='%s', cellNumber='%d') in the database with id '%s'", firstName, lastName, cellNumber, id );
 
                         if ( callback ) {
-                            callback( null, { _id: id } );
+                            callback( null, { id: id } );
                         }
                     }
                 });
@@ -47,17 +47,17 @@ define(
                 });
             },
             updateCellNumber: function( id, cellNumber, callback ) {
-                console.log( "Updating cell number '%s' for contact in database with id '%s'", cellNumber, id );
+                console.log( "Updating cell number to '%s', for contact in database with id '%s'", cellNumber, id );
 
                 ContactModel.update( { "_id": id }, { 'cellNumber': cellNumber }, function( error, result ) {
                     if ( error ) {
-                        console.error( "Error updating cell number '%s' for contact in database with id '%s'", cellNumber, id );
+                        console.error( "Error updating cell number to '%s', for contact in database with id '%s'", cellNumber, id );
 
                         if ( callback ) {
                             callback( error );
                         }
                     } else {
-                        console.log( "Successfully updated '%d' contact(s) in the database with cell number '%s' and id '%s'", result, cellNumber, id );
+                        console.log( "Successfully updated the cell number to '%s', for '%d' contact(s) in the database with id '%s'", cellNumber, result, id );
 
                         if ( callback ) {
                             callback( null, { count: result } );

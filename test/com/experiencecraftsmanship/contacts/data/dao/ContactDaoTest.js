@@ -10,13 +10,14 @@ requirejs(
                 this.lastName = "Martin";
                 this.cellNumber = 123678924;
                 this.id = "4f08f1b04bcd790100000002";
+                this.result = { _id: this.id, firstName: this.firstName, lastName: this.lastName, cellNumber: this.cellNumber };
 
                 this.callback = this.spy();
                 this.error = new Error();
             },
             "returns the id of the new contact": function() {
                 var contact = { save: function() {} };
-                var contactStub = this.stub( contact, "save" ).yields( null, { _id: this.id, firstName: this.firstName, lastName: this.lastName, cellNumber: this.cellNumber } );
+                var contactStub = this.stub( contact, "save" ).yields( null, this.result );
                 contact.save = contactStub;
 
                 var contactModelStub = this.stub( ContactModel, "newInstance" ).returns( contact );
@@ -25,14 +26,14 @@ requirejs(
 
                 assert( contactModelStub.called );
                 assert( contactStub.called );
-                assert.calledOnceWith( this.callback, null, { _id: this.id } );
+                assert.calledOnceWith( this.callback, null, { id: this.id } );
                 assert.equals( contact.firstName, this.firstName );
                 assert.equals( contact.lastName, this.lastName );
                 assert.equals( contact.cellNumber, this.cellNumber );
             },
             "without a callback": function() {
                 var contact = { save: function() {} };
-                var contactStub = this.stub( contact, "save" ).yields( null, { _id: this.id, firstName: this.firstName, lastName: this.lastName, cellNumber: this.cellNumber } );
+                var contactStub = this.stub( contact, "save" ).yields( null, this.result );
                 contact.save = contactStub;
 
                 var contactModelStub = this.stub( ContactModel, "newInstance" ).returns( contact );
