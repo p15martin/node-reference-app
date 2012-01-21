@@ -3,6 +3,8 @@ define(
     function( ContactModel ) {
         return {
             addContact: function( firstName, lastName, cellNumber, callback ) {
+                var start = Date.now();
+
                 console.log( "Creating a new contact in the database for firstName='%s', 'lastName='%s', cellNumber='%d'", firstName, lastName, cellNumber );
 
                 var contact = ContactModel.newInstance();
@@ -19,7 +21,7 @@ define(
                     } else {
                         var id = result._id;
 
-                        console.log( "Successfully created the new contact (firstName='%s', 'lastName='%s', cellNumber='%d') in the database with id '%s'", firstName, lastName, cellNumber, id );
+                        console.log( "Successfully created the new contact (firstName='%s', 'lastName='%s', cellNumber='%d') in the database with id '%s' [%dms]", firstName, lastName, cellNumber, id, Date.now()-start );
 
                         if ( callback ) {
                             callback( null, { id: id } );
@@ -28,6 +30,8 @@ define(
                 });
             },
             findAllContactsByLastName: function( lastName, callback ) {
+                var start = Date.now();
+
                 console.log( "Finding all contacts in the database with lastName '%s'", lastName );
 
                 ContactModel.find( { "lastName": lastName }, function ( error, result ) {
@@ -38,7 +42,7 @@ define(
                             callback( error );
                         }
                     } else {
-                        console.log( "Successfully found '%d' contacts in the database with lastName '%s'", result.length, lastName );
+                        console.log( "Successfully found '%d' contacts in the database with lastName '%s' [%dms]", result.length, lastName, Date.now()-start );
 
                         if ( callback ) {
                             callback( null, result );
@@ -47,6 +51,8 @@ define(
                 });
             },
             updateCellNumber: function( id, cellNumber, callback ) {
+                var start = Date.now();
+
                 console.log( "Updating cell number to '%s', for contact in database with id '%s'", cellNumber, id );
 
                 ContactModel.update( { "_id": id }, { 'cellNumber': cellNumber }, function( error, result ) {
@@ -57,7 +63,7 @@ define(
                             callback( error );
                         }
                     } else {
-                        console.log( "Successfully updated the cell number to '%s', for '%d' contact(s) in the database with id '%s'", cellNumber, result, id );
+                        console.log( "Successfully updated the cell number to '%s', for '%d' contact(s) in the database with id '%s' [%dms]", cellNumber, result, id, Date.now()-start );
 
                         if ( callback ) {
                             callback( null, { count: result } );
@@ -66,6 +72,8 @@ define(
                 });
             },
             deleteContact: function( id, callback ) {
+                var start = Date.now();
+
                 console.log( "Deleting contact from database with id '%s'", id );
 
                 ContactModel.remove( { "_id": id }, function( error, result ) {
@@ -76,7 +84,7 @@ define(
                             callback( error );
                         }
                     } else {
-                        console.log( "Successfully deleted '%d' contact(s) from the database with id '%s'", result, id );
+                        console.log( "Successfully deleted '%d' contact(s) from the database with id '%s' [%dms]", result, id, Date.now()-start );
 
                         if ( callback ) {
                             callback( null, { count: result } );

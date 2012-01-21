@@ -18,7 +18,16 @@ requirejs(
                 assert.calledOnce( callback );
     	        assert( mongooseMock.verify() );
    	        },
-            "fail": function () {
+            "without callback": function () {
+                var mongooseMock = this.mock( mongoose ).expects( "connect" ).once().withArgs( this.mongoUri ).yields( null );
+
+                var callback = this.spy();
+
+                database.connectToDatabase( this.mongoUri );
+
+                assert( mongooseMock.verify() );
+            },
+            "with error": function () {
                 var error = new Error();
                 var mongooseMock = this.mock( mongoose ).expects( "connect" ).once().withArgs( this.mongoUri ).yields( error );
 
@@ -28,7 +37,17 @@ requirejs(
 
                 assert.calledOnceWith( callback, error );
                 assert( mongooseMock.verify() );
-    	    }
+    	    },
+            "with error and no callback": function () {
+                var error = new Error();
+                var mongooseMock = this.mock( mongoose ).expects( "connect" ).once().withArgs( this.mongoUri ).yields( error );
+
+                var callback = this.spy();
+
+                database.connectToDatabase( this.mongoUri );
+
+                assert( mongooseMock.verify() );
+            }
         });
     }
 );

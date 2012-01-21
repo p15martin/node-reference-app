@@ -21,6 +21,8 @@ define(
         
         return {
             start: function( mongoUri, rpcServerPort ) {
+                var start = Date.now();
+                
                 console.log( "Starting application..." );
 
                 async.parallel([
@@ -31,7 +33,7 @@ define(
                     if ( error ) {
                         throw new ApplicationError( "Error starting application!" );
                     } else {
-                        console.info( "Successfully started application!" );
+                        console.info( "Successfully started application [%dms]", Date.now()-start );
                     }
                 });
             }

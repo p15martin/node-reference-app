@@ -12,7 +12,7 @@ define(
                         callback( error, result );
                     }
 
-                    console.log( "Service call completed to create new contact for firstName='%s', 'lastName='%s', cellNumber='%d', in %dms", firstName, lastName, cellNumber, Date.now()-start );
+                    console.log( "Service call completed to create new contact for firstName='%s', 'lastName='%s', cellNumber='%d' [%dms]", firstName, lastName, cellNumber, Date.now()-start );
                 });
             },
             findAllContactsByLastName: function( lastName, callback ) {
@@ -25,7 +25,7 @@ define(
                         callback( error, result );
                     }
 
-                    console.log( "Service call completed to find all contacts with lastName '%s', in %dms", lastName, Date.now()-start );
+                    console.log( "Service call completed to find all contacts with lastName '%s' [%dms]", lastName, Date.now()-start );
                 });
             },
             updateCellNumber: function( id, cellNumber, callback ) {
@@ -38,7 +38,7 @@ define(
                         callback( error, result );
                     }
 
-                    console.log( "Service call completed to update the cell number to '%s', for the contact with id '%s', in %dms", cellNumber, id, Date.now()-start );
+                    console.log( "Service call completed to update the cell number to '%s', for the contact with id '%s' [%dms]", cellNumber, id, Date.now()-start );
                 });
             },
             deleteContact: function( id, callback ) {
@@ -51,7 +51,7 @@ define(
                         callback( error, result );
                     }
 
-                    console.log( "Service call completed to delete contact with id '%s', in %dms", id, Date.now()-start );
+                    console.log( "Service call completed to delete contact with id '%s' [%dms]", id, Date.now()-start );
                 });
             }
         }
