@@ -42,7 +42,7 @@ requirejs(
             "with an error and no callback": function () {
                 var contactDaoMock = this.mock( contactDao ).expects( "addContact" ).once().yields( this.error );
 
-                contactService.addContact( this.lastName);
+                contactService.addContact( this.lastName );
 
                 assert( contactDaoMock.verify() );
             }
