@@ -1,6 +1,22 @@
 define(
     [ "async", "database", "rpcServer" ],
     function( async, database, rpcServer ) {
+        function startServices( mongoUri, rpcServerPort ) {
+            var start = Date.now();
+
+            async.parallel([
+                function( callback ) { connectToDatabase( mongoUri, callback ) },
+                function( callback ) { startRpcServer( rpcServerPort, callback ) }
+            ],
+            function( error ) {
+                if ( error ) {
+                    throw new ApplicationError( "Error starting application!" );
+                } else {
+                    console.info( "Successfully started application [%dms]", Date.now()-start );
+                }
+            });   
+        }
+
         function connectToDatabase( mongoUri, callback ) {
             database.connectToDatabase( mongoUri, callback );
         }
@@ -33,21 +49,10 @@ define(
         
         return {
             start: function( mongoUri, rpcServerPort ) {
-                var start = Date.now();
-                
                 console.log( "Starting application..." );
 
-                async.parallel([
-                    function( callback ) { connectToDatabase( mongoUri, callback ) },
-                    function( callback ) { startRpcServer( rpcServerPort, callback ) }
-                ],
-                function( error ) {
-                    if ( error ) {
-                        throw new ApplicationError( "Error starting application!" );
-                    } else {
-                        console.info( "Successfully started application [%dms]", Date.now()-start );
-                    }
-                });
+                addProcessHandlers();
+                startServices( mongoUri, rpcServerPort );                
             }
         }
     }
