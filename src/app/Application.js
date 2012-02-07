@@ -8,7 +8,19 @@ define(
         function startRpcServer( rpcServerPort, callback ) {
             rpcServer.startServer( rpcServerPort, callback );
         }
-        
+         
+        function addProcessHandlers() {
+            process.on( "SIGTERM", function () { 
+                console.log( "Got SIGTERM" );
+                process.exit(0);
+            });
+
+            process.on( "SIGINT", function () { 
+                console.log( "Got SIGINT" );
+                process.exit(0);
+            });
+        }
+
         function ApplicationError( message ) {
             Error.call( this );
             Error.captureStackTrace( this, this.constructor );

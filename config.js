@@ -1,6 +1,6 @@
 module.exports = {
     nodeRequire: require,
-    baseUrl: "com/experiencecraftsmanship/contacts",
+    baseUrl: "src",
     "packages": [
         {
             name: "app",
